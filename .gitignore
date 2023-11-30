@@ -217,4 +217,4 @@ fabric.properties
 .idea/
 
 # Python venv
-rlot-venv/
+rlot_venv/
