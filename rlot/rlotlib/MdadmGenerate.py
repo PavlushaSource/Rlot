@@ -6,6 +6,21 @@ NAME_FOR_BDEV = "/dev/md0"
 DEVICES_FOR_RAID = ["/dev/sdb", "/dev/sdc", "/dev/sdd", "/dev/sde", "/dev/sdf"]
 VERSION_RAID = 0
 
+available_ini_option = {
+    "ioengine",
+    "invalidate",
+    "ramp_time",
+    "size",
+    "runtime",
+    "bs",
+    "iodepth",
+    "numjobs",
+    "mode",
+    "rw",
+    "dev",
+    "number_realization",
+}
+
 
 def run_command(command):
     try:

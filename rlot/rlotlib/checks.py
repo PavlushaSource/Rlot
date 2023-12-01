@@ -1,5 +1,6 @@
 import shutil
 import sys
+from MdadmGenerate import available_ini_option
 
 
 def check_if_fio_exists():
@@ -14,7 +15,7 @@ def check_fio_setting(settings):
         print("\nType should be a device for Rlot correct work.\n")
         sys.exit(2)
 
-    if settings["mode"] not in ["write", "randwrite", "read", "randread"]:
-        print("\nMode should be one of the options: [write, randwrite, read, randread].\n")
-        sys.exit(3)
+    mode_available = ["spdk", "raid", "bdev"]
+    if settings["global"]["mode"]:
+        print("hello blin")
 
