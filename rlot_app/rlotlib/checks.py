@@ -19,3 +19,19 @@ def check_fio_setting(settings):
     if settings["global"]["mode"]:
         print("hello blin")
 
+
+def check_first():
+    return None
+
+
+def check_ini_file(filename):
+    check_file_exist(filename)
+    return None
+
+
+def check_file_exist(filename):
+    return None
+
+
+def check_args(args):
+    return None
