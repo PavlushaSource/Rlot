@@ -14,7 +14,7 @@ def read_ini_file(filename):
 
 
 def main():
-    filename = "/home/pavlusha/Documents/PracticeWork/Rlot/resources/raid5.ini"
+    filename = "/resources/raid5.ini"
     config = configparser.ConfigParser()
     config.read(Path(filename))
     print(*config['raid']['dev'].split(','))
