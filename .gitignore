@@ -218,3 +218,4 @@ fabric.properties
 
 # Python venv
 rlot-venv/
+rlot_venv/
