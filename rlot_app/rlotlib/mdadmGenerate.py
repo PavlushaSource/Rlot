@@ -3,8 +3,6 @@ import sys
 
 
 NAME_FOR_BDEV = "/dev/md0"
-DEVICES_FOR_RAID = ["/dev/sdb", "/dev/sdc", "/dev/sdd", "/dev/sde", "/dev/sdf"]
-VERSION_RAID = 0
 
 available_ini_option = {
     "ioengine",
@@ -27,7 +25,7 @@ def run_command(command):
         result = subprocess.run(
             command, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE
         )
-        if result.returncode > 0:
+        if result.returncode > 0: # run Raid0 or generate Json for Spdkrncode > 0:
             stdout = result.stdout.decode("UTF-8").strip()
             stderr = result.stderr.decode("UTF-8").strip()
             print(f"\nAn error occurred: stderr: {stderr} - stdout: {stdout} - returncode: {result.returncode} \n")
@@ -64,14 +62,3 @@ def mdadm_create(devices, version):
     result = run_command(create_command)
     return result
 
-def main():
-    args = sys.argv[1:]
-    if len(args) > 0 and args[0] == "--create":
-        mdadm_create(DEVICES_FOR_RAID, VERSION_RAID)
-    elif len(args) > 0 and args[0] == "--stop":
-        mdadm_stop(DEVICES_FOR_RAID)
-    print("Hello world!")
-    
-
-if __name__ == "__main__":
-    main()
