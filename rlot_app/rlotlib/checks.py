@@ -1,9 +1,11 @@
 import os
 import shutil
 import sys
+from . import (
+    painterGraph
+)
 
-
-AVAILABLE_GROUP_NAMES = {"global", "bdev", "spdk"}
+AVAILABLE_GROUP_NAMES = {"global", "raid", "spdk"}
 AVAILABLE_PARAMETR_NAMES = {
     "ioengine",
     "invalidate",
@@ -18,7 +20,6 @@ AVAILABLE_PARAMETR_NAMES = {
     "number_realization",
     "spdk_json_conf",
 }
-
 
 def check_if_fio_exists():
     command = "fio"
@@ -82,6 +83,12 @@ def check_user_config_setting(config):
         print("For spdk testing, the ioengine parameter must be equal to 'spdk_bdev'\n")
         sys.exit(2)
 
+    if mode == "global" and len(config[mode]["dev"].split(',')) != 1:
+        print("The number of bdev in a simple disk test should be equal to 1\n")
+        sys.exit(2)
+
+    # if mode != "global" and len(config[mode]["dev"])
+
     if mode == "spdk" and "spdk_json_conf" not in config[mode]:
         print("You must specify the 'spdk_json_conf' parametera\n")
         sys.exit(2)
@@ -109,6 +116,11 @@ def check_ini_file(filename):
     check_file_extension(filename)
 
 
+def get_ouput_graphs_path(args):
+    if len(args) == 2:
+        return painterGraph.get_output_dir_for_graph()
+    return args[2]
+
 def check_args(args):
 
     if len(args) < 2:
@@ -116,7 +128,7 @@ def check_args(args):
         print("Example: >> python3 rlot.py conf.ini\n")
         sys.exit(1)
 
-    if len(args) > 2:
+    if len(args) > 3:
         print("The call failed. There are too many arguments")
         print("Example: >> python3 rlot.py conf.ini\n")
         sys.exit(1)
