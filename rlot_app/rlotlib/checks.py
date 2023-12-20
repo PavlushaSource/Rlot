@@ -84,10 +84,24 @@ def check_user_config_setting(config):
         sys.exit(2)
 
     if mode == "global" and len(config[mode]["dev"].split(',')) != 1:
-        print("The number of bdev in a simple disk test should be equal to 1\n")
+        print("The count of bdev in a simple disk test should be equal to 1\n")
         sys.exit(2)
 
-    # if mode != "global" and len(config[mode]["dev"])
+    if mode != "global" and config[mode]["number_realization"] in [0, 1] and len(config[mode]["dev"]) < 2:
+        print("The count of bdev in a RAID-0|1 should be equal or grow 2\n")
+        sys.exit(2)
+
+    if mode != "global" and config[mode]["number_realization"] == 5 and len(config[mode]["dev"]) < 3:
+        print("The count of bdev in a RAID-5 should be equal or grow 3\n")
+        sys.exit(2)
+
+    if mode != "global" and config[mode]["number_realization"] == 6 and len(config[mode]["dev"]) < 4:
+        print("The count of bdev in a RAID-6 should be equal or grow 4\n")
+        sys.exit(2)
+
+    if mode != "global" and config[mode]["number_realization"] not in [0, 1, 5, 6]:
+        print(f"RAID-{config[mode]['number_realization']} not support or not exist")
+        sys.exit(2)
 
     if mode == "spdk" and "spdk_json_conf" not in config[mode]:
         print("You must specify the 'spdk_json_conf' parametera\n")
