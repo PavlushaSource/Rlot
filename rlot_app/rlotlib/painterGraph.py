@@ -50,6 +50,9 @@ def filter_data_logs(settings, data_logs_array):
     return log_dict
 
 
+def total_data_for_one_second():
+    return None
+
 def draw_graph(title, rw, logs_array, path_to_graph_dir, dir_for_logs, type_graph):
     X, Y = [], []
     for log_file in logs_array:
