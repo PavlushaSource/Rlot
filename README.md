@@ -5,7 +5,7 @@ A utility for testing the performance of different RAID arrays of kernel space a
 ## Features
 - Support for testing any of your mounted block devices
 - Support for automatic launch of Mdadm RAID implementation _(kernel space)_
-- Support for SPDK RAID implemepython3 -m pip install -r requirements.txtntations. __Important__: The file for the description of the SPDK RAID device is not generated automatically
+- Support for SPDK RAID implementations. __Important__: The file for the description of the SPDK RAID device is not generated automatically
 
 ## TO-DO
 1. Implement support for more than just IOPs graphs.
