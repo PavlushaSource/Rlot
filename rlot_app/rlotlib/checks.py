@@ -29,15 +29,17 @@ def check_if_fio_exists():
 
 
 def define_mode_dev(config):
-    mode = "global"
-    if "spdk" in config and "raid" not in config:
-        mode = "spdk"
-    elif "raid" in config and "spdk" not in config:
-        mode = "raid"
-    elif "raid" in config and "spdk" in config:
+    if "raid" in config and "spdk" in config:
         print(
             "There cannot be [spdk] and [bdev] parameters at the same time!\n")
         sys.exit(2)
+
+    mode = "global"
+    if "spdk" in config:
+        mode = "spdk"
+    elif "raid" in config:
+        mode = "raid"
+
     return mode
 
 
@@ -99,7 +101,7 @@ def check_user_config_setting(config):
         print("The count of bdev in a RAID-6 should be equal or grow 4\n")
         sys.exit(2)
 
-    if mode != "global" and config[mode]["number_realization"] not in [0, 1, 5, 6]:
+    if mode != "global" and int(config[mode]["number_realization"]) not in [0, 1, 5, 6]:
         print(f"RAID-{config[mode]['number_realization']} not support or not exist")
         sys.exit(2)
 
@@ -110,24 +112,8 @@ def check_user_config_setting(config):
     return mode
 
 
-def check_file_extension(filename):
-
-    if (filename.split('.')[-1]) != "ini":
-        print("Invalid file extension\n")
-        sys.exit(1)
 
 
-def check_file_exist(filename):
-
-    if not os.path.isfile(filename):
-        print(f"Config file {filename} not found\n")
-        sys.exit(1)
-
-
-def check_ini_file(filename):
-
-    check_file_exist(filename)
-    check_file_extension(filename)
 
 
 def get_ouput_graphs_path(args):
@@ -135,19 +121,6 @@ def get_ouput_graphs_path(args):
         return painterGraph.get_output_dir_for_graph()
     return args[2]
 
-def check_args(args):
-
-    if len(args) < 2:
-        print("The call failed. Specify the .ini configuration file")
-        print("Example: >> python3 rlot.py conf.ini\n")
-        sys.exit(1)
-
-    if len(args) > 3:
-        print("The call failed. There are too many arguments")
-        print("Example: >> python3 rlot.py conf.ini\n")
-        sys.exit(1)
-
-    check_ini_file(args[1])
 
 
 def main():

@@ -20,7 +20,7 @@ available_ini_option = {
 }
 
 
-def run_command(command):
+def run_command(command) -> None:
     try:
         result = subprocess.run(
             command, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE
@@ -32,7 +32,6 @@ def run_command(command):
             sys.exit(result.returncode)
     except KeyboardInterrupt:
         sys.exit(1)
-    return result
 
 
 def mdadm_stop(devices):

@@ -1,10 +1,11 @@
 import sys
 import os
 
+from ..lib.arg_parser import default_configs
+
 from .rlotlib import (
     parseIni,
     checks,
-    defaultFio,
     preparationForWork,
     generateFio,
     runFio,
@@ -26,7 +27,11 @@ def get_settings():
 
 def main():
     checks.check_if_fio_exists()
+
     settings_for_fio = get_settings()
+
+
+
     settings_for_fio = preparationForWork.prepare_env(settings_for_fio) 
     path_to_fio_file, path_to_log_files = generateFio.create_fio_file(
         settings_for_fio)
