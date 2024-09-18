@@ -1,7 +1,8 @@
 import sys
+
+from ...lib.arg_parser import default_configs
 from . import (
     checks,
-    defaultFio,
 )
 
 import configparser
@@ -23,5 +24,5 @@ def get_ini_config(file_path):
         sys.exit(1)
 
     checks.check_user_config_setting(config)
-    config = merge_two_conf(defaultFio.get_default_config(checks.define_mode_dev(config)), config)
+    config = merge_two_conf(default_configs.get_default_config(checks.define_mode_dev(config)), config)
     return config
