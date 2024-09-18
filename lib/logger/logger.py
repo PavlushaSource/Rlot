@@ -17,9 +17,8 @@ class Logger(ABC):
         self.settings = settings
         self.__fio_file_path = None
         self.__logs_dir_path = None
-        self.__start_logger()
 
-    def __start_logger(self) -> None:
+    def start_logger(self) -> None:
         pass
 
     def free_logger(self) -> None:
