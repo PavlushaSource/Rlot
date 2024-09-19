@@ -111,8 +111,4 @@ def check_user_config_setting(config):
         print(f"RAID-{config[mode]['number_realization']} not support or not exist")
         sys.exit(2)
 
-    if mode == "spdk" and "spdk_json_conf" not in config[mode]:
-        print("You must specify the 'spdk_json_conf' parametera\n")
-        sys.exit(2)
-
     return mode

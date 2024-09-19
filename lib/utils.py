@@ -39,10 +39,10 @@ def get_current_data():
     return datetime.now().strftime("%d-%m-%Y-%H-%M-%S")
 
 
-def run_command(command) -> None:
+def run_command(command, my_env=None) -> None:
     try:
         result = subprocess.run(
-            command, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+            command, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=my_env
         )
         if result.returncode > 0:  # run Raid0 or generate Json for Spdkrncode > 0:
             stdout = result.stdout.decode("UTF-8").strip()

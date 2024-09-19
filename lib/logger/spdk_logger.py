@@ -52,7 +52,7 @@ class Spdk_logger(Logger, ABC):
             'params': {
                 'name': self._get_file_name_param(),
                 'raid_level': raid_version,
-                'strip_size_kb': block_size / 1024,
+                'strip_size_kb': int(block_size / 1024),
                 'base_bdevs': base_bdevs,
             },
         })
@@ -76,6 +76,9 @@ class Spdk_logger(Logger, ABC):
         self._write_fio_to_file(fio_config)
 
     def run_fio(self) -> None:
-        preload = f"LD_PRELOAD={self.__path_to_spdk_repo}/build/fio/spdk_bdev"
-        command = [preload, "fio", self._fio_file_path]
-        run_command(command)
+        my_env = os.environ.copy()
+        my_env["LD_PRELOAD"] = f"{self.__path_to_spdk_repo}/build/fio/spdk_bdev"
+        command = ["fio", self._fio_file_path]
+        # print("run fio with command - ", *command)
+        # run_command(preload)
+        run_command(command, my_env=my_env)
