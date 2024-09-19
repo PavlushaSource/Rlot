@@ -11,5 +11,4 @@ AVAILABLE_PARAMETR_NAMES = {
     "rw",
     "dev",
     "number_realization",
-    "spdk_json_conf",
 }

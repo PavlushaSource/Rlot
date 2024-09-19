@@ -29,7 +29,6 @@ def get_ini_config(file_path) -> configparser.ConfigParser:
 
 def get_config() -> configparser.ConfigParser:
     check_args(sys.argv)
-    check_ini_file(sys.argv[1])
     config = get_ini_config(sys.argv[1])
     check_user_config_setting(config)
 

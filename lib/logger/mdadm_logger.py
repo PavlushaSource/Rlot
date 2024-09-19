@@ -22,7 +22,7 @@ class Mdadm_logger(Logger, ABC):
         command_init.append("--verbose")
         command_init.append("--chunk=512")
         command_init.append(self._get_file_name_param())
-        command_init.append(f"--level={self.settings["raid"]["number_realization"]}")
+        command_init.append(f"--level={self.settings['raid']['number_realization']}")
 
         command_init.append(f"--raid-devices={len(self.__devices)}")
         for x in self.__devices:
