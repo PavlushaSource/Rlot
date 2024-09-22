@@ -5,14 +5,27 @@ from lib.arg_parser import parser
 from lib.logger.mdadm_logger import Mdadm_logger
 from lib.logger.bdev_logger import Bdev_logger
 from lib.logger.spdk_logger import Spdk_logger
+from lib.logger.logger import Logger
+from lib.utils import define_mode_dev
 
 def main():
     utils.check_fio_exists()
     config = parser.get_config()
 
-    logger = Spdk_logger(settings=config, path_to_spdk_repo="/root/spdk")
+    mode = define_mode_dev(config)
+
+    logger: Logger = None
+    if mode == "global":
+        logger = Bdev_logger(settings=config)
+    elif mode == "raid":
+        logger = Mdadm_logger(settings=config)
+    else:
+        logger = Spdk_logger(settings=config, path_to_spdk_repo="/root/spdk")
+
+    logger.start_logger()
     logger.generate_fio_file()
     logger.run_fio()
+    logger.free_logger()
 
 
 if __name__ == "__main__":
