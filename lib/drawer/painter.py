@@ -88,11 +88,8 @@ class Painter:
         logs_dict = self.__get_data_logs_dict()
 
         for rw in logs_dict:
-            #  TODO create file for neccassary graph type
-            
             for type_graph in logs_dict[rw]:
                 logs_path_array = logs_dict[rw][type_graph]
-                
 
                 avg_data_array = self.__calculate_avg_all_jobs(logs_path_array)
 

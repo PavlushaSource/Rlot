@@ -7,6 +7,7 @@ from lib.logger.bdev_logger import Bdev_logger
 from lib.logger.spdk_logger import Spdk_logger
 from lib.logger.logger import Logger
 from lib.utils import define_mode_dev
+from lib.drawer.painter import Painter
 
 def main():
     utils.check_fio_exists()
@@ -26,6 +27,9 @@ def main():
     logger.generate_fio_file()
     logger.run_fio()
     logger.free_logger()
+
+    painter = Painter(logger._logs_dir_path, config)
+    painter.draw_graph()
 
 
 if __name__ == "__main__":
