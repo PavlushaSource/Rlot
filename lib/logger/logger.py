@@ -45,9 +45,6 @@ class Logger(ABC):
             fio_file[section_name]["filename"] = file_name_param
             fio_file[section_name]["rw"] = rw
 
-            # TODO think about log_avg_msec
-            fio_file[section_name]["log_avg_msec"] = "1000"
-
             mode = self._get_mode()
             fio_file[section_name][
                 "write_bw_log"
