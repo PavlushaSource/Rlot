@@ -77,7 +77,7 @@ class Logger(ABC):
         os.makedirs(self._logs_dir_path, exist_ok=True)
 
         fio_config = self._create_config_for_fio()
-        self.__write_fio_to_file(fio_config)
+        self._write_fio_to_file(fio_config)
 
     def run_fio(self) -> None:
         command = ["fio", self._fio_file_path]
