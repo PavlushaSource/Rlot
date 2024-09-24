@@ -28,7 +28,7 @@ def main():
     logger.run_fio()
     logger.free_logger()
 
-    painter = Painter(logger._logs_dir_path, config)
+    painter = Painter(logger._logs_dir_path, config, logger._get_mode())
     painter.draw_graph()
 
 

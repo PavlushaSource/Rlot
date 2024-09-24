@@ -11,7 +11,7 @@ class Mdadm_logger(Logger, ABC):
 
 
     def _get_file_name_param(self) -> str:
-        return f"dev/md_{self.settings['raid']['number_realization']}"
+        return f"/dev/md{self.settings['raid']['number_realization']}"
 
     def _get_mode(self) -> str:
         return "mdadm"
