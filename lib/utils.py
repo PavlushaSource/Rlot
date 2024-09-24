@@ -44,8 +44,10 @@ def run_command(command, my_env=None) -> None:
         result = subprocess.run(
             command, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=my_env
         )
+        stdout = result.stdout.decode("UTF-8").strip()
+        print(stdout)
         if result.returncode > 0:  # run Raid0 or generate Json for Spdkrncode > 0:
-            stdout = result.stdout.decode("UTF-8").strip()
+            # stdout = result.stdout.decode("UTF-8").strip()
             stderr = result.stderr.decode("UTF-8").strip()
             print(
                 f"\nAn error occurred: stderr: {stderr} - stdout: {stdout} - returncode: {result.returncode} \n"
