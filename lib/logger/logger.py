@@ -36,7 +36,7 @@ class Logger(ABC):
         fio_file.set("global", "direct", "1")
 
         for key, value in self.settings.items("global"):
-            if key not in ["rw", "dev"]:
+            if key not in ["rw", "dev", "path_to_spdk_repo"]:
                 fio_file["global"][key] = value
 
         for rw in [i.strip() for i in self.settings["global"]["rw"].split(",")]:

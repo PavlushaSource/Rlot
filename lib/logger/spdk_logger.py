@@ -8,10 +8,10 @@ from .logger import Logger
 
 
 class Spdk_logger(Logger, ABC):
-    def __init__(self, settings: ConfigParser, path_to_spdk_repo: str) -> None:
+    def __init__(self, settings: ConfigParser) -> None:
         self.__devices = [i.strip() for i in settings["spdk"]["dev"].split(",")]
         self.__config_spdk_json_path = None
-        self.__path_to_spdk_repo = path_to_spdk_repo
+        self.__path_to_spdk_repo = settings['global']['path_to_spdk_repo']
         super().__init__(settings)
 
     def _get_file_name_param(self) -> str:

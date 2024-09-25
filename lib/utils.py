@@ -38,6 +38,9 @@ def define_mode_dev(config):
 def get_current_data():
     return datetime.now().strftime("%d-%m-%Y-%H-%M-%S")
 
+def get_current_data_short():
+    return datetime.now().strftime("%d/%m/%Y")
+
 
 def run_command(command, my_env=None) -> None:
     try:
