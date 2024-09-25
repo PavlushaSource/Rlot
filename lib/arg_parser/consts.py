@@ -11,4 +11,5 @@ AVAILABLE_PARAMETR_NAMES = {
     "rw",
     "dev",
     "number_realization",
+    "path_to_spdk_repo",
 }

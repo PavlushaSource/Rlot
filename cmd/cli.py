@@ -21,14 +21,14 @@ def main():
     elif mode == "raid":
         logger = Mdadm_logger(settings=config)
     else:
-        logger = Spdk_logger(settings=config, path_to_spdk_repo="/root/spdk")
+        logger = Spdk_logger(settings=config)
 
     logger.start_logger()
     logger.generate_fio_file()
     logger.run_fio()
     logger.free_logger()
 
-    painter = Painter(logger._logs_dir_path, config, logger._get_mode())
+    painter = Painter(logger._logs_dir_path, config, logger._get_mode(), logger._get_file_name_param())
     painter.draw_graph()
 
 
