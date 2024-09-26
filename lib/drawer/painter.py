@@ -107,7 +107,7 @@ class Painter:
         # ax1.text(0.15, size_delim_y * 0.2, f"Confidence interval 95%: ({round(confidence_interval[0])};{round(confidence_interval[1])})")
         # ax1.text(0.15, size_delim_y * 0.4, f"Avg: {np.mean(Y_array, axis=0)}")
 
-        ax1.set_title(f"avg={avg_data} | CI 95%=({l_bord_CI}, {r_bord_CI})", fontsize=16)
+        ax1.set_title(f"avg={round(avg_data)} | CI 95%=({l_bord_CI}, {r_bord_CI})", fontsize=16)
         ax1.set_title(right_title, loc='right', fontsize=12)
         ax1.set_title(left_title, loc='left', fontsize=12)
         ax1.set_ylim(0, None)
