@@ -17,12 +17,16 @@ class Mdadm_logger(Logger, ABC):
         return "mdadm"
 
     def __create_mdadm_init_command(self) -> list[str]:
+
+        raid_level = self.settings['raid']['number_realization']
+
         command_init = ["mdadm"]
         command_init.append("--create")
         command_init.append("--verbose")
-        command_init.append("--chunk=512")
+        if raid_level != "1":
+            command_init.append("--chunk=512")
         command_init.append(self._get_file_name_param())
-        command_init.append(f"--level={self.settings['raid']['number_realization']}")
+        command_init.append(f"--level={raid_level}")
 
         command_init.append(f"--raid-devices={len(self.__devices)}")
         for x in self.__devices:
