@@ -11,53 +11,60 @@ class Spdk_logger(Logger, ABC):
     def __init__(self, settings: ConfigParser) -> None:
         self.__devices = [i.strip() for i in settings["spdk"]["dev"].split(",")]
         self.__config_spdk_json_path = None
-        self.__path_to_spdk_repo = settings['global']['path_to_spdk_repo']
+        self.__path_to_spdk_repo = settings["global"]["path_to_spdk_repo"]
         super().__init__(settings)
 
     def _get_file_name_param(self) -> str:
         return f"SpdkRaid{self.settings['spdk']['number_realization']}"
+
     def _get_mode(self) -> str:
         return "spdk"
 
     def generate_spdk_config_json(self) -> None:
-        bs_str = self.settings['global']['bs']
-        if bs_str[-1] == 'K':
+        bs_str = self.settings["global"]["bs"]
+        if bs_str[-1] == "K":
             # convert bs to bytes
             block_size = int(bs_str[:-1]) * 1024
         else:
             print(f"Incorrect block size: {bs_str}")
             sys.exit(1)
-        raid_version = self.settings['spdk']['number_realization']
+        raid_version = self.settings["spdk"]["number_realization"]
 
-        config = {'subsystems': []}
-        config['subsystems'].append({
-            'subsystem': 'bdev',
-        })
+        config = {"subsystems": []}
+        config["subsystems"].append(
+            {
+                "subsystem": "bdev",
+            }
+        )
         base_bdevs = []
-        config['subsystems'][0]['config'] = []
+        config["subsystems"][0]["config"] = []
 
         for i, dev in enumerate(self.__devices):
-            config['subsystems'][0]['config'].append({
-                'params': {
-                    'block_size': block_size,
-                    'filename': dev,
-                    'name': f"Uring{i}"
-                },
-                'method': 'bdev_uring_create'
-            })
+            config["subsystems"][0]["config"].append(
+                {
+                    "params": {
+                        "block_size": block_size,
+                        "filename": dev,
+                        "name": f"Uring{i}",
+                    },
+                    "method": "bdev_uring_create",
+                }
+            )
             base_bdevs.append(f"Uring{i}")
 
-        config['subsystems'][0]['config'].append({
-            'method': 'bdev_raid_create',
-            'params': {
-                'name': self._get_file_name_param(),
-                'raid_level': raid_version,
-                'strip_size_kb': int(block_size / 1024),
-                'base_bdevs': base_bdevs,
-            },
-        })
+        config["subsystems"][0]["config"].append(
+            {
+                "method": "bdev_raid_create",
+                "params": {
+                    "name": self._get_file_name_param(),
+                    "raid_level": raid_version,
+                    "strip_size_kb": int(block_size / 1024),
+                    "base_bdevs": base_bdevs,
+                },
+            }
+        )
 
-        with open(self.__config_spdk_json_path, 'w') as outfile:
+        with open(self.__config_spdk_json_path, "w") as outfile:
             json.dump(config, outfile)
 
     def generate_fio_file(self) -> None:
@@ -65,7 +72,9 @@ class Spdk_logger(Logger, ABC):
         root_path = get_root_path()
         self._fio_file_path = f"{root_path}/tmp/tmpfile-{current_time}.fio"
         self._logs_dir_path = f"{root_path}/tmp/logs-dir-{current_time}"
-        self.__config_spdk_json_path = f"{root_path}/tmp/config-spdk-{current_time}.json"
+        self.__config_spdk_json_path = (
+            f"{root_path}/tmp/config-spdk-{current_time}.json"
+        )
         os.makedirs(self._logs_dir_path, exist_ok=True)
 
         self.generate_spdk_config_json()

@@ -9,6 +9,7 @@ from lib.logger.logger import Logger
 from lib.utils import define_mode_dev
 from lib.drawer.painter import Painter
 
+
 def main():
     utils.check_fio_exists()
     config = parser.get_config()
@@ -28,7 +29,9 @@ def main():
     logger.run_fio()
     logger.free_logger()
 
-    painter = Painter(logger._logs_dir_path, config, logger._get_mode(), logger._get_file_name_param())
+    painter = Painter(
+        logger._logs_dir_path, config, logger._get_mode(), logger._get_file_name_param()
+    )
     painter.draw_graph()
 
 

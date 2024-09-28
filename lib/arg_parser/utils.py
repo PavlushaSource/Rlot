@@ -5,14 +5,8 @@ from .consts import AVAILABLE_GROUP_NAMES, AVAILABLE_PARAMETR_NAMES
 
 
 def check_args(args):
-
-    if len(args) < 2:
+    if len(args) != 2:
         print("The call failed. Specify the .ini configuration file")
-        print("Example: >> python3 rlot.py conf.ini\n")
-        sys.exit(1)
-
-    if len(args) > 3:
-        print("The call failed. There are too many arguments")
         print("Example: >> python3 rlot.py conf.ini\n")
         sys.exit(1)
 
@@ -20,7 +14,6 @@ def check_args(args):
 
 
 def check_file_extension(filename):
-
     if (filename.split(".")[-1]) != "ini":
         print("Invalid file extension\n")
         sys.exit(1)
@@ -32,7 +25,6 @@ def check_ini_file(filename):
 
 
 def check_user_config_setting(config):
-
     for section in config.sections():
         if section not in AVAILABLE_GROUP_NAMES:
             print(f"incorrect [{section}] section, remove this!\n")

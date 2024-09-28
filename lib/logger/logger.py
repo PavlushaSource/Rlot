@@ -6,7 +6,6 @@ from lib.utils import define_mode_dev, get_current_data, get_root_path, run_comm
 
 
 class Logger(ABC):
-
     @abstractmethod
     def _get_file_name_param(self) -> str: ...
 
@@ -46,15 +45,15 @@ class Logger(ABC):
             fio_file[section_name]["rw"] = rw
 
             mode = self._get_mode()
-            fio_file[section_name][
-                "write_bw_log"
-            ] = f"{self._logs_dir_path}/{self.settings['global']['bs']}-{rw}-{mode}.results"
-            fio_file[section_name][
-                "write_iops_log"
-            ] = f"{self._logs_dir_path}/{self.settings['global']['bs']}-{rw}-{mode}.results"
-            fio_file[section_name][
-                "write_lat_log"
-            ] = f"{self._logs_dir_path}/{self.settings['global']['bs']}-{rw}-{mode}.results"
+            fio_file[section_name]["write_bw_log"] = (
+                f"{self._logs_dir_path}/{self.settings['global']['bs']}-{rw}-{mode}.results"
+            )
+            fio_file[section_name]["write_iops_log"] = (
+                f"{self._logs_dir_path}/{self.settings['global']['bs']}-{rw}-{mode}.results"
+            )
+            fio_file[section_name]["write_lat_log"] = (
+                f"{self._logs_dir_path}/{self.settings['global']['bs']}-{rw}-{mode}.results"
+            )
 
         return fio_file
 

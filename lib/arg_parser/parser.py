@@ -6,6 +6,7 @@ from lib.utils import define_mode_dev
 from lib.arg_parser.utils import check_args, check_ini_file, check_user_config_setting
 from lib.arg_parser.default_configs import get_default_config
 
+
 def merge_two_conf(old_conf, new_conf):
     for section in new_conf.sections():
         for key, value in new_conf.items(section):
@@ -23,7 +24,6 @@ def get_ini_config(file_path) -> configparser.ConfigParser:
         print(f"{err}\n")
         sys.exit(1)
 
-    
     return config
 
 
@@ -34,8 +34,6 @@ def get_config() -> configparser.ConfigParser:
 
     # merge default and user config file.ini
     mode = define_mode_dev(config)
-    config = merge_two_conf(
-        get_default_config(mode), config
-    )
+    config = merge_two_conf(get_default_config(mode), config)
 
     return config

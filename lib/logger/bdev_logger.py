@@ -7,7 +7,6 @@ from .logger import Logger
 
 
 class Bdev_logger(Logger, ABC):
-
     def _get_file_name_param(self) -> str:
         return self.settings["global"]["dev"]
 
