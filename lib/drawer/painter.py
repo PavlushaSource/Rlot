@@ -43,7 +43,7 @@ class Painter:
             for logs in all_logs:
                 for type_graph in ["iops", "lat", "bw", "slat", "clat"]:
                     if logs.startswith(
-                            f"{self.settings['global']['bs']}-{rw}-{self.mode_bdev}.results_{type_graph}"
+                        f"{self.settings['global']['bs']}-{rw}-{self.mode_bdev}.results_{type_graph}"
                     ):
                         logs_dict[rw][type_graph].append(logs)
         return logs_dict
@@ -83,15 +83,15 @@ class Painter:
         return all_result_array
 
     def __draw_graph(
-            self,
-            Y_array,
-            confidence_interval: tuple,
-            title: str,
-            y_label: str,
-            right_title=None,
-            left_title=None,
-            rw="",
-            type_graph="",
+        self,
+        Y_array,
+        confidence_interval: tuple,
+        title: str,
+        y_label: str,
+        right_title=None,
+        left_title=None,
+        rw="",
+        type_graph="",
     ):
         X_array = list(range(1, len(Y_array) + 1))
 
@@ -166,6 +166,7 @@ class Painter:
 
 def convert_to_MiB(x):
     return round(x / 1024)
+
 
 def convert_to_ms(x):
     return round(x / 1e6)
