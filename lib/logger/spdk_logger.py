@@ -1,13 +1,12 @@
-from abc import ABC, abstractmethod
 from configparser import ConfigParser
 import json
 import os
 import sys
-from lib.utils import define_mode_dev, get_current_data, get_root_path, run_command
+from lib.utils import get_current_data, get_root_path, run_command
 from .logger import Logger
 
 
-class Spdk_logger(Logger, ABC):
+class Spdk_logger(Logger):
     def __init__(self, settings: ConfigParser) -> None:
         self.__devices = [i.strip() for i in settings["spdk"]["dev"].split(",")]
         self.__config_spdk_json_path = None

@@ -1,11 +1,10 @@
-from abc import ABC
 from configparser import ConfigParser
 from .logger import Logger
 
 from lib.utils import run_command
 
 
-class Mdadm_logger(Logger, ABC):
+class Mdadm_logger(Logger):
     def __init__(self, settings: ConfigParser) -> None:
         self.__devices = [i.strip() for i in settings["raid"]["dev"].split(",")]
         super().__init__(settings)

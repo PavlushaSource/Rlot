@@ -4,7 +4,6 @@ import numpy as np
 import scipy.stats as st
 from lib.utils import (
     get_root_path,
-    define_mode_dev,
     get_current_data,
     get_current_data_short,
 )
@@ -44,7 +43,7 @@ class Painter:
             for logs in all_logs:
                 for type_graph in ["iops", "lat", "bw", "slat", "clat"]:
                     if logs.startswith(
-                        f"{self.settings['global']['bs']}-{rw}-{self.mode_bdev}.results_{type_graph}"
+                            f"{self.settings['global']['bs']}-{rw}-{self.mode_bdev}.results_{type_graph}"
                     ):
                         logs_dict[rw][type_graph].append(logs)
         return logs_dict
@@ -84,15 +83,15 @@ class Painter:
         return all_result_array
 
     def __draw_graph(
-        self,
-        Y_array,
-        confidence_interval: tuple,
-        title: str,
-        y_label: str,
-        right_title=None,
-        left_title=None,
-        rw="",
-        type_graph="",
+            self,
+            Y_array,
+            confidence_interval: tuple,
+            title: str,
+            y_label: str,
+            right_title=None,
+            left_title=None,
+            rw="",
+            type_graph="",
     ):
         X_array = list(range(1, len(Y_array) + 1))
 
@@ -114,7 +113,7 @@ class Painter:
         ax1.set_title(left_title, loc="left", fontsize=12)
         ax1.set_ylim(0, None)
         ax1.set_ylabel(y_label, fontsize=12)
-        ax1.set_xlabel(f"time in (seconds)", fontsize=12)
+        ax1.set_xlabel("time in (seconds)", fontsize=12)
 
         fig.set_size_inches(15, 8)
         fig.suptitle(title, fontsize=20)
@@ -133,13 +132,11 @@ class Painter:
                 avg_data_array = self.__calculate_sum_all_jobs(logs_path_array)
 
                 if type_graph == "bw":
-                    convert_to_MiB = lambda x: round(x / 1024)
                     avg_data_array = np.array(
                         [convert_to_MiB(t) for t in avg_data_array]
                     )
 
                 if type_graph in ["clat", "lat", "slat"]:
-                    convert_to_ms = lambda x: round(x / 1e6)
                     avg_data_array = np.array(
                         [convert_to_ms(t) for t in avg_data_array]
                     )
@@ -165,3 +162,10 @@ class Painter:
                     rw,
                     type_graph,
                 )
+
+
+def convert_to_MiB(x):
+    return round(x / 1024)
+
+def convert_to_ms(x):
+    return round(x / 1e6)

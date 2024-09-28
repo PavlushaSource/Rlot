@@ -3,7 +3,7 @@ import sys
 import configparser
 
 from lib.utils import define_mode_dev
-from lib.arg_parser.utils import check_args, check_ini_file, check_user_config_setting
+from lib.arg_parser.utils import check_args, check_user_config_setting
 from lib.arg_parser.default_configs import get_default_config
 
 

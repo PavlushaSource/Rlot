@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from configparser import ConfigParser
 import os
 import sys
-from lib.utils import define_mode_dev, get_current_data, get_root_path, run_command
+from lib.utils import get_current_data, get_root_path, run_command
 
 
 class Logger(ABC):
@@ -62,7 +62,7 @@ class Logger(ABC):
             with open(self._fio_file_path, "w") as fio_file:
                 fio_config.write(fio_file, space_around_delimiters=False)
         except IOError:
-            print(f"Failed to write temporary Fio job file at tmpjobfile")
+            print("Failed to write temporary Fio job file at tmpjobfile")
             sys.exit(3)
 
     def generate_fio_file(self) -> None:
