@@ -137,9 +137,7 @@ python3 main.py <path_to_conf_file.ini>
 After the utility is finished, the out folder will be created in the project root, where iops, lat, clat, slat,
 bandwidth graphs will be located.
 
-
-<img src=https://github.com/PavlushaSource/Rlot/blob/feat/bdev/example/output_graph_example.png alt="" width="500">
-<figcaption>Example of a generated graph</figcaption>
+<img src="example/output_graph_example.png" width="1024"/>
 
 ## License
 
